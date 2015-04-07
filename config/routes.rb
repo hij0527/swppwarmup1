@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+	root 'auth#main'
+	post 'signup' => 'auth#signup'
+	post 'login' => 'auth#login'
+	post 'clearData' => 'auth#clearData'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
