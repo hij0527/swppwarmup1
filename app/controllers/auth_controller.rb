@@ -2,46 +2,53 @@ class AuthController < ApplicationController
 	def main
 	end
 
-	def welcome
-		@user = UsersModel.find_by(username: "00000")
-	end
-
 	def signup
 		user = UsersModel.new(user_params)
 		if user.valid?
 			user.save
-#			redirect_to welcome_path(:json => { "user_name": user.username, "login_count": user.count })
-			render :json => { "user_name": user.username, "login_count": user.count }, :action => :welcome
+			log_in user
+			render :json => { "user_name": user.username, "login_count": user.count }
 		else
-			print "asdfasdf\n"
-			print user.errors.to_json
-			print "\nasdfasdf\n"
 			if user.errors.added?(:username, :too_short, count: 5) ||
 				 user.errors.added?(:username, :too_long, count: 20)
-				render :json => { "error_code": -1 }, :action => :root, :status => 401
+				render :json => { "error_code": -1 }, :status => 401
 			elsif user.errors.added?(:password, :too_short, count: 8) ||
 						user.errors.added?(:password, :too_long, count: 20)
-				render :json => { "error_code": -2 }, :action => :root, :status => 401
+				render :json => { "error_code": -2 }, :status => 401
 			elsif user.errors.added?(:username, :taken)
-				render :json => { "error_code": -3 }, :action => :root, :status => 401
+				render :json => { "error_code": -3 }, :status => 401
 			else
-				render :json => { "error_code": -999 }, :action => :root, :status => 400
+				render :json => { "error_code": -999 }, :status => 400
 			end
 		end
 	end
 
 	def login
+		user_params
+		user = UsersModel.find_by(username: params[:username], password: params[:password])
+		if user
+			user.count += 1
+			user.save
+			log_in user
+			render :json => { "user_name": user.username, "login_count": user.count }
+		else
+			render :json => { "error_code": -4 }, :status => 401
+		end
+	end
+
+	def logout
+		log_out user
+		render nothing: true
 	end
 
 	def clearData
-	end
-
-	def create
-		render plain: params[:credentials].inspect
+		UsersModel.delete_all()
+		render nothing: true
 	end
 
 	private
 	def user_params
-		params.require(:credentials).permit(:username, :password)
+		params.permit(:username, :password)
 	end
 end
+

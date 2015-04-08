@@ -14,9 +14,22 @@ $ ->
 			url: "/signup"
 			dataType: "json"
 			data:
-				credentials:
-					username: $("#credentials_username").val()
-					password: $("#credentials_password").val()
+				username: $("#credentials_username").val()
+				password: $("#credentials_password").val()
+			error: (jqXHR, status, errorThrown) ->
+				$("#error_msg").text(error_msg(jqXHR.responseJSON["error_code"]))
+			success: (resp, status) ->
+				$("#error_msg").text(resp["user_name"])
+
+$ ->
+	$("#login_button").click ->
+		$.ajax
+			type: "post"
+			url: "/login"
+			dataType: "json"
+			data:
+				username: $("#credentials_username").val()
+				password: $("#credentials_password").val()
 			error: (jqXHR, status, errorThrown) ->
 				$("#error_msg").text(error_msg(jqXHR.responseJSON["error_code"]))
 			success: (resp, status) ->
