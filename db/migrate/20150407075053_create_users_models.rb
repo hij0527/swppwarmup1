@@ -3,9 +3,10 @@ class CreateUsersModels < ActiveRecord::Migration
     create_table :users_models do |t|
       t.string :username
       t.string :password
-      t.integer :count
+      t.integer :count, default: 1
 
-      t.timestamps null: false
+#      t.timestamps null: false
     end
+    add_index :usersmodels, :username, unique: true
   end
 end
