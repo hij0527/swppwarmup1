@@ -1,19 +1,24 @@
+error_msg = (code) ->
+	switch code
+		when -1 then "The user name should be 5~20 characters long. Please try again."
+		when -2 then "The password should be 8~20 characters long. Please try again."
+		when -3 then "This user name already exists. Please try again."
+		when -4 then "Invalid username and password combination. Please try again. "
+		else "Undefined error."
+
+
 $ ->
-	$.ajax
-		dataType: "json"
-		success: (resp, status) ->
-			$("#error_msg").text(resp["username"])
-		error: (resp, status) ->
-			code = resp["error"]
-			error_msg = ""
-			if (code==-1)
-				error_msg = "The user name should be 5~20 characters long. Please try again."
-			else if (code == -2)
-				error_msg = "The password should be 8~20 characters long. Please try again."
-			else if (code == -3)
-				error_msg = "This user name already exists. Please try again."
-			else if (code == -4)
-				error_msg = "Invalid username and password combination. Please try again. "
-			else
-				error_msg = "Undefined error. no hack."
-			$("#error_msg").text(error_msg)
+	$("#signup_button").click ->
+		$.ajax
+			type: "post"
+			url: "/signup"
+			dataType: "json"
+			data:
+				credentials:
+					username: $("#credentials_username").val()
+					password: $("#credentials_password").val()
+			error: (jqXHR, status, errorThrown) ->
+				$("#error_msg").text(error_msg(jqXHR.responseJSON["error_code"]))
+			success: (resp, status) ->
+				$("#error_msg").text(resp["user_name"])
+

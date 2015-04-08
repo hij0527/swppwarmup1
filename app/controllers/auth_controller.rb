@@ -13,18 +13,19 @@ class AuthController < ApplicationController
 #			redirect_to welcome_path(:json => { "user_name": user.username, "login_count": user.count })
 			render :json => { "user_name": user.username, "login_count": user.count }, :action => :welcome
 		else
+			print "asdfasdf\n"
+			print user.errors.to_json
+			print "\nasdfasdf\n"
 			if user.errors.added?(:username, :too_short, count: 5) ||
 				 user.errors.added?(:username, :too_long, count: 20)
 				render :json => { "error_code": -1 }, :action => :root, :status => 401
 			elsif user.errors.added?(:password, :too_short, count: 8) ||
 						user.errors.added?(:password, :too_long, count: 20)
 				render :json => { "error_code": -2 }, :action => :root, :status => 401
-#			elsif user.errors.added?(:username, :taken)
-			elsif user.errors.added?(:username, :blank)
+			elsif user.errors.added?(:username, :taken)
 				render :json => { "error_code": -3 }, :action => :root, :status => 401
 			else
-				render :json => user.errors, :action => :root, :status => 400
-#				render :json => { "error_code": -999 }, :action => :root, :status => 400
+				render :json => { "error_code": -999 }, :action => :root, :status => 400
 			end
 		end
 	end
