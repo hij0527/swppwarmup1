@@ -14,8 +14,8 @@ $ ->
 			url: "/signup"
 			dataType: "json"
 			data:
-				username: $("#credentials_username").val()
-				password: $("#credentials_password").val()
+				username: $("#username").val()
+				password: $("#password").val()
 			error: (jqXHR, status, errorThrown) ->
 				$("#error_msg").text(error_msg(jqXHR.responseJSON["error_code"]))
 			success: (resp, status) ->
@@ -28,8 +28,8 @@ $ ->
 			url: "/login"
 			dataType: "json"
 			data:
-				username: $("#credentials_username").val()
-				password: $("#credentials_password").val()
+				username: $("#username").val()
+				password: $("#password").val()
 			error: (jqXHR, status, errorThrown) ->
 				$("#error_msg").text(error_msg(jqXHR.responseJSON["error_code"]))
 			success: (resp, status) ->

@@ -2,21 +2,21 @@
 
 <p id="error_msg"></p>
 
-<%= form_for :credentials, url: signup_path do |f| %>
+<form>
 	<table>
 		<tr>
-			<td><%= f.label :username %>:</td>
-			<td><%= f.text_field :username%></td>
+			<td><label for="username">Username:</td>
+			<td><input type="text" id="username" name="username"></td>
 		</tr>
 		<tr>
-			<td><%= f.label :password %>:</td>
-			<td><%= f.password_field :password %></td>
+			<td><label for="password">Password:</td>
+			<td><input type="password" id="password" name="password"></td>
 		</tr>
 	</table>
-<% end %>
 
-<button id="login_button">Login</button>
-<button id="signup_button">Add User</button>
+	<button id="login_button">Login</button>
+	<button id="signup_button">Add User</button>
+</form>
 
 <p id="code"></p>
 <p id="username"></p>
