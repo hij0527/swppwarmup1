@@ -14,11 +14,11 @@
 ActiveRecord::Schema.define(version: 20150407075053) do
 
   create_table "users_models", force: :cascade do |t|
-    t.string   "username"
-    t.string   "password"
-    t.integer  "count"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string  "username"
+    t.string  "password"
+    t.integer "count",    default: 1
   end
+
+  add_index "users_models", ["username"], name: "index_users_models_on_username", unique: true
 
 end

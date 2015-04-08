@@ -7,6 +7,6 @@ class CreateUsersModels < ActiveRecord::Migration
 
 #      t.timestamps null: false
     end
-    add_index :usersmodels, :username, unique: true
+    add_index :users_models, :username, unique: true
   end
 end

@@ -37,7 +37,7 @@ class AuthController < ApplicationController
 	end
 
 	def logout
-		log_out user
+		log_out
 		render nothing: true
 	end
 

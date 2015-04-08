@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 	root 'auth#main'
 	post 'signup' => 'auth#signup'
 	post 'login' => 'auth#login'
+	post 'logout' => 'auth#logout'
 	post 'clearData' => 'auth#clearData'
 
   # The priority is based upon order of creation: first created -> highest priority.
