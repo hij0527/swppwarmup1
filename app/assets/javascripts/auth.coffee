@@ -8,7 +8,17 @@ error_msg = (code) ->
 
 welcome = (username, count) ->
 	welcome_msg = "Welcome " + username + " <br> You have logged in " + count.toString() + " times."
-	$("#welcome_msg").text(welcome_msg)
+	$("#msg_box").html(welcome_msg)
+	$("#main").hide()
+	$("#welcome").show()
+
+render_main = () ->
+	$("#msg_box").text("Please enter your credentials below")
+	$("#main").show()
+	$("#welcome").hide()
+
+$ ->
+	render_main()
 
 $ ->
 	$("#login_button").click ->
@@ -24,6 +34,7 @@ $ ->
 			success: (resp, status) ->
 				welcome(resp["user_name"], resp["login_count"])
 
+$ ->
 	$("#signup_button").click ->
 		$.ajax
 			type: "post"
@@ -42,4 +53,5 @@ $ ->
 		$.ajax
 			type: "post"
 			url: "/logout"
-
+			success:
+				render_main()

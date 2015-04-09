@@ -1,23 +1,25 @@
-<p>Please enter your credentials below</p>
+<p id="msg_box">Please enter your credentials below</p>
 
-<p id="error_msg"> </p>
+<div id="main">
+	<p id="error_msg"> </p>
 
-<form method="post">
-	<table>
-		<tr>
-			<td><label for="username">Username:</label></td>
-			<td><input type="text" id="username" name="username" /></td>
-		</tr>
-		<tr>
-			<td><label for="password">Password:</label></td>
-			<td><input type="password" id="password" name="password" /></td>
-		</tr>
-	</table>
-</form>
+	<form method="post">
+		<table>
+			<tr>
+				<td><label for="username">Username:</label></td>
+				<td><input type="text" id="username" name="username" /></td>
+			</tr>
+			<tr>
+				<td><label for="password">Password:</label></td>
+				<td><input type="password" id="password" name="password" /></td>
+			</tr>
+		</table>
+	</form>
 
-<button id="login_button">Login</button>
-<button id="signup_button">Add User</button>
+	<button id="login_button">Login</button>
+	<button id="signup_button">Add User</button>
+</div>
 
-<button id="logout_button">Logout</button>
-
-<p id="welcome_msg"></p>
+<div id="welcome">
+	<button id="logout_button">Logout</button>
+</div>
