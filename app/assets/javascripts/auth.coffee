@@ -14,6 +14,7 @@ welcome = (username, count) ->
 
 render_main = () ->
 	$("#msg_box").text("Please enter your credentials below")
+	$("#error_msg").text("")
 	$("#main").show()
 	$("#welcome").hide()
 
